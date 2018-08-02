@@ -474,25 +474,25 @@ function TransactionBuilder (network, maximumFeeRate) {
   this.inputs = []
   this.tx = new Transaction()
 
-  if (this.network.txversion !== undefined) {
-    this.setVersion(this.network.txversion)
-  }
-  if (this.network.versionGroupId !== undefined) {
-    this.setVersionGroupId(this.network.versionGroupId)
-  }
+ // if (this.network.txversion !== undefined) {
+   // this.setVersion(this.network.txversion)
+  //}
+  //if (this.network.versionGroupId !== undefined) {
+  //  this.setVersionGroupId(this.network.versionGroupId)
+ // }
 }
 
-TransactionBuilder.prototype.setExpiry = function (expiry) {
-  typeforce(types.UInt32, expiry)
+//TransactionBuilder.prototype.setExpiry = function (expiry) {
+//  typeforce(types.UInt32, expiry)
 
-  this.tx.expiry = expiry
-}
+//  this.tx.expiry = expiry
+//}
 
-TransactionBuilder.prototype.setVersionGroupId = function (versiongroupid) {
-  typeforce(types.UInt32, versiongroupid)
+//TransactionBuilder.prototype.setVersionGroupId = function (versiongroupid) {
+//  typeforce(types.UInt32, versiongroupid)
 
-  this.tx.versiongroupid = versiongroupid
-}
+// this.tx.versiongroupid = versiongroupid
+//}
 
 TransactionBuilder.prototype.setLockTime = function (locktime) {
   typeforce(types.UInt32, locktime)
