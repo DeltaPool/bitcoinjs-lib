@@ -366,7 +366,9 @@ Transaction.prototype.__byteLength = function (__allowWitness) {
     this.outs.reduce(function (sum, output) { return sum + 8 + varSliceSize(output.script) }, 0) +
     (hasWitnesses ? this.ins.reduce(function (sum, input) { return sum + vectorSize(input.witness) }, 0) : 0) +
     this.joinsplitByteLength() +
-    (this.version === 3 ? 12 : 0)
+    (this.versionGroupId == null ? 0 : 4) +
+    (this.version === 3 ? 12 : 0) +
+    (this.expiry == null ? 0 : 4)
   )
 }
 
@@ -698,7 +700,7 @@ Transaction.prototype.__toBuffer = function (buffer, initialOffset, __allowWitne
     writeSlice(i.x)
   }
 
-  if (this.version >= 3 && this.zcash) {
+  if (this.versionGroupId != null) {
     writeInt32(this.version | (1 << 31))
     writeUInt32(this.versionGroupId)
   } else {
@@ -740,7 +742,7 @@ Transaction.prototype.__toBuffer = function (buffer, initialOffset, __allowWitne
 
   writeUInt32(this.locktime)
 
-  if (this.version >= 3 && this.zcash) {
+  if (this.expiry != null) {
     writeUInt32(this.expiry)
   }
 
