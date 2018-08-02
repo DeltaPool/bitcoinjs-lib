@@ -520,13 +520,13 @@ TransactionBuilder.fromTransaction = function (transaction, network) {
   var txb = new TransactionBuilder(network)
 
   // Copy transaction fields
-  //var version = transaction.version & 0x7fffffff
+  var version = transaction.version & 0x7fffffff
   txb.setVersion(transaction.version)
   txb.setLockTime(transaction.locktime)
-  //if (version >= 3) {
-   // txb.setVersionGroupId(transaction.versiongroupid)
-    //txb.setExpiry(transaction.expiry)
- // }
+  if (version >= 3) {
+    txb.setVersionGroupId(transaction.versiongroupid)
+    txb.setExpiry(transaction.expiry)
+  }
 
   // Copy outputs (done first to avoid signature invalidation)
   transaction.outs.forEach(function (txOut) {
