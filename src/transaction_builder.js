@@ -520,10 +520,10 @@ TransactionBuilder.fromTransaction = function (transaction, network) {
   var txb = new TransactionBuilder(network)
 
   // Copy transaction fields
-  // var version = transaction.version & 0x7fffffff
+  var version = transaction.version & 0x7fffffff
   txb.setVersion(transaction.version)
   txb.setLockTime(transaction.locktime)
-  if (version != null) {
+  if (version >= 3) {
     txb.setVersionGroupId(transaction.versiongroupid)
     txb.setExpiry(transaction.expiry)
   }
@@ -721,8 +721,8 @@ TransactionBuilder.prototype.sign = function (vin, keyPair, redeemScript, hashTy
   var signatureHash
   if (input.witness) {
     signatureHash = this.tx.hashForWitnessV0(vin, input.signScript, input.value, hashType)
-  } else if (overwintered) {
-    signatureHash = this.tx.hashForZIP143(vin, input.signScript, witnessValue, hashType)
+  // } else if (overwintered) {
+  // signatureHash = this.tx.hashForZIP143(vin, input.signScript, witnessValue, hashType)
   } else {
     signatureHash = this.tx.hashForSignature(vin, input.signScript, hashType)
   }
