@@ -700,7 +700,7 @@ Transaction.prototype.__toBuffer = function (buffer, initialOffset, __allowWitne
   }
 
   if (this.versionGroupId != null) {
-    writeInt32(this.version | (1 << 31))
+    writeInt32(this.version | (1 << 31));
     writeUInt32(this.versionGroupId)
   } else {
     writeInt32(this.version)
