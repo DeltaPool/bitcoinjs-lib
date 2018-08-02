@@ -366,9 +366,8 @@ Transaction.prototype.__byteLength = function (__allowWitness) {
     this.outs.reduce(function (sum, output) { return sum + 8 + varSliceSize(output.script) }, 0) +
     (hasWitnesses ? this.ins.reduce(function (sum, input) { return sum + vectorSize(input.witness) }, 0) : 0) +
     this.joinsplitByteLength() +
-    (this.version === 3 ? 12 : 0) +
-	(this.versionGroupId == null ? 0 : 4) +
-	(this.expiry == null ? 0 : 4)
+	this.versionGroupId == null ? 0 : 4) +
+	this.expiry == null ? 0 : 4)
   )
 }
 
