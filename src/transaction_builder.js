@@ -523,7 +523,7 @@ TransactionBuilder.fromTransaction = function (transaction, network) {
   var version = transaction.version & 0x7fffffff
   txb.setVersion(transaction.version)
   txb.setLockTime(transaction.locktime)
-  if (version >= 3) {
+  if (version != null) {
     txb.setVersionGroupId(transaction.versiongroupid)
     txb.setExpiry(transaction.expiry)
   }
